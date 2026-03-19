@@ -33,13 +33,13 @@ export function generateOAuthState(): string {
 export async function exchangeCode(config: StravaConfig, code: string): Promise<StravaTokens> {
   const res = await fetch(STRAVA_TOKEN_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
       client_id: config.clientId,
       client_secret: config.clientSecret,
       code,
       grant_type: "authorization_code",
-    }),
+    }).toString(),
   });
 
   if (!res.ok) {
@@ -74,13 +74,13 @@ export async function refreshTokens(
 ): Promise<StravaTokens> {
   const res = await fetch(STRAVA_TOKEN_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
       client_id: config.clientId,
       client_secret: config.clientSecret,
       refresh_token: refreshToken,
       grant_type: "refresh_token",
-    }),
+    }).toString(),
   });
 
   if (!res.ok) {
