@@ -67,6 +67,7 @@ function createAuthStatusTool(deps: ToolDeps) {
   return {
     name: "strava_auth_status",
     label: "Strava Auth Status",
+    ownerOnly: true,
     description:
       "Check whether the user's Strava account is connected. If not connected, returns an authorization URL the user can visit to link their account.",
     parameters: Type.Object({}),
@@ -103,6 +104,7 @@ function createActivitiesTool(deps: ToolDeps) {
   return {
     name: "strava_activities",
     label: "Strava Activities",
+    ownerOnly: true,
     description:
       "List the user's recent Strava activities. Returns distance, pace, duration, heart rate, and other metrics. Use this to review recent training.",
     parameters: Type.Object({
@@ -199,6 +201,7 @@ function createActivityDetailTool(deps: ToolDeps) {
   return {
     name: "strava_activity_detail",
     label: "Strava Activity Detail",
+    ownerOnly: true,
     description:
       "Get full details for a specific Strava activity including per-km splits, laps, heart rate, calories, and gear. Use the activity ID from strava_activities.",
     parameters: Type.Object({
@@ -262,8 +265,9 @@ function createStatsTool(deps: ToolDeps) {
   return {
     name: "strava_stats",
     label: "Strava Stats",
+    ownerOnly: true,
     description:
-      "Get the user's aggregated Strava statistics: recent, year-to-date, and all-time totals for running, cycling, and swimming.",
+      "Get the user's aggregated Strava statistics: recent, year-to-date, and all-time totals for running, cycling, and swimming. Note: Strava only includes activities with Everyone visibility in these totals, so private or followers-only activities are excluded. For complete totals, sum activities from strava_activities instead.",
     parameters: Type.Object({}),
     execute: withRevocationGuard(deps, async () => {
       const tokens = deps.tokenStore.load();

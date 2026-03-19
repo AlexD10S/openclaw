@@ -18,7 +18,7 @@ export function buildAuthUrl(
     redirect_uri: redirectUri,
     response_type: "code",
     scope,
-    approval_prompt: "auto",
+    approval_prompt: "force",
     state,
   });
   return `${STRAVA_AUTH_URL}?${params.toString()}`;

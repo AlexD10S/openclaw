@@ -12,7 +12,7 @@ describe("buildAuthUrl", () => {
     expect(url).toContain("redirect_uri=");
     expect(url).toContain("response_type=code");
     expect(url).toContain("scope=activity%3Aread_all");
-    expect(url).toContain("approval_prompt=auto");
+    expect(url).toContain("approval_prompt=force");
     expect(url).toContain("state=abc123");
   });
 
